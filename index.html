@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mental Health Score Prediction</title>
+<meta name="description" content="A machine-learning powered self-assessment that estimates a mental health score from daily habits, digital behavior, and lifestyle.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='%237C5CFA'/%3E%3Ccircle cx='50' cy='50' r='24' fill='%2335C2AE'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-ambient" aria-hidden="true">
+  <span class="blob blob-blue"></span>
+  <span class="blob blob-purple"></span>
+  <span class="blob blob-teal"></span>
+</div>
+
+<header class="site-header">
+  <a href="#top" class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span class="brand-name">MindSignal</span>
+  </a>
+  <div class="backend-status" id="backendStatus" title="Connection to the prediction API">
+    <span class="status-dot" id="statusDot"></span>
+    <span class="status-text" id="statusText">Checking backend&hellip;</span>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <p class="eyebrow">Trained on 5,000 student survey responses</p>
+      <h1>Mental Health Score Prediction</h1>
+      <p class="subtitle">Understand the relationship between your daily habits, digital behavior, lifestyle, and mental well-being.</p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="startAssessmentBtn">Start Assessment</button>
+        <a href="#about" class="btn-link">How this works ↓</a>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="breathing-orb">
+        <span class="orb-ring ring-1"></span>
+        <span class="orb-ring ring-2"></span>
+        <span class="orb-ring ring-3"></span>
+        <span class="orb-core"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT / CONTEXT STRIP ============ -->
+  <section class="about-strip" id="about">
+    <div class="about-item">
+      <span class="about-figure">RandomForest</span>
+      <span class="about-label">regression model</span>
+    </div>
+    <div class="about-item">
+      <span class="about-figure">12</span>
+      <span class="about-label">input signals</span>
+    </div>
+    <div class="about-item">
+      <span class="about-figure">0–10</span>
+      <span class="about-label">predicted score scale</span>
+    </div>
+    <div class="about-item">
+      <span class="about-figure">~2 min</span>
+      <span class="about-label">to complete</span>
+    </div>
+  </section>
+
+  <!-- ============ ASSESSMENT ============ -->
+  <section class="assessment" id="assessment">
+    <div class="section-heading">
+      <h2>Your Assessment</h2>
+      <p>Three short sections. Nothing you enter is stored.</p>
+    </div>
+
+    <div class="wizard-card glass-card">
+
+      <div class="wizard-progress" role="list" aria-label="Assessment progress">
+        <div class="progress-step active" data-step="1" role="listitem">
+          <span class="step-index">1</span>
+          <span class="step-label">Personal</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-step" data-step="2" role="listitem">
+          <span class="step-index">2</span>
+          <span class="step-label">Digital Usage</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill2"></div></div>
+        <div class="progress-step" data-step="3" role="listitem">
+          <span class="step-index">3</span>
+          <span class="step-label">Lifestyle</span>
+        </div>
+      </div>
+
+      <p class="form-banner" id="formBanner" role="alert" hidden></p>
+
+      <form id="assessmentForm" novalidate>
+
+        <!-- STEP 1 — PERSONAL -->
+        <fieldset class="form-step active" data-step="1" aria-labelledby="step1-heading">
+          <legend id="step1-heading" class="step-heading">Personal Information</legend>
+
+          <div class="field">
+            <label for="age">Age <span class="unit">years</span></label>
+            <input type="number" id="age" name="age" inputmode="numeric" min="10" max="100" step="1" value="21" required>
+            <p class="field-hint">Whole number between 10 and 100.</p>
+            <p class="field-error" id="age-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+              <option value="" disabled selected>Select&hellip;</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <p class="field-error" id="gender-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="country">Country</label>
+            <select id="country" name="country" required>
+              <option value="" disabled selected>Select&hellip;</option>
+              <option value="India">India</option>
+              <option value="USA">USA</option>
+              <option value="Canada">Canada</option>
+              <option value="Australia">Australia</option>
+              <option value="UK">UK</option>
+              <option value="Germany">Germany</option>
+              <option value="Mexico">Mexico</option>
+              <option value="Turkey">Turkey</option>
+              <option value="France">France</option>
+              <option value="Other">Other</option>
+            </select>
+            <p class="field-hint">Not listed? Choose "Other" — the model groups every less-common country together.</p>
+            <p class="field-error" id="country-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="academicLevel">Academic Level</label>
+            <select id="academicLevel" name="academic_level" required>
+              <option value="" disabled selected>Select&hellip;</option>
+              <option value="High School">High School</option>
+              <option value="Undergraduate">Undergraduate</option>
+              <option value="Graduate">Graduate</option>
+            </select>
+            <p class="field-error" id="academicLevel-error" role="alert"></p>
+          </div>
+
+          <div class="step-actions">
+            <span></span>
+            <button type="button" class="btn btn-primary step-next" data-next="2">Continue</button>
+          </div>
+        </fieldset>
+
+        <!-- STEP 2 — DIGITAL USAGE -->
+        <fieldset class="form-step" data-step="2" aria-labelledby="step2-heading" disabled>
+          <legend id="step2-heading" class="step-heading">Digital Usage</legend>
+
+          <div class="field">
+            <label for="platform">Most Used Platform</label>
+            <select id="platform" name="most_used_platform" required>
+              <option value="" disabled selected>Select&hellip;</option>
+              <option value="Instagram">Instagram</option>
+              <option value="TikTok">TikTok</option>
+              <option value="Facebook">Facebook</option>
+              <option value="LinkedIn">LinkedIn</option>
+              <option value="YouTube">YouTube</option>
+              <option value="Twitter">Twitter</option>
+              <option value="Snapchat">Snapchat</option>
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="LINE">LINE</option>
+              <option value="VKontakte">VKontakte</option>
+              <option value="KakaoTalk">KakaoTalk</option>
+              <option value="WeChat">WeChat</option>
+            </select>
+            <p class="field-error" id="platform-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="purpose">Purpose of Use</label>
+            <select id="purpose" name="purpose_of_use" required>
+              <option value="" disabled selected>Select&hellip;</option>
+              <option value="Networking">Networking</option>
+              <option value="Education">Education</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="News">News</option>
+            </select>
+            <p class="field-error" id="purpose-error" role="alert"></p>
+          </div>
+
+          <div class="field slider-field">
+            <div class="slider-label-row">
+              <label for="usageHours">Average Daily Usage</label>
+              <output for="usageHours" id="usageHoursValue" class="slider-output">5.0 hrs</output>
+            </div>
+            <input type="range" id="usageHours" name="avg_daily_usage_hours" min="0" max="24" step="0.1" value="5">
+            <p class="field-error" id="usageHours-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="unlocks">Daily Phone Unlocks <span class="unit">per day</span></label>
+            <input type="number" id="unlocks" name="daily_unlocks" inputmode="numeric" min="0" step="1" value="120" required>
+            <p class="field-hint">How many times you unlock your phone in a typical day.</p>
+            <p class="field-error" id="unlocks-error" role="alert"></p>
+          </div>
+
+          <div class="step-actions">
+            <button type="button" class="btn btn-ghost step-back" data-back="1">Back</button>
+            <button type="button" class="btn btn-primary step-next" data-next="3">Continue</button>
+          </div>
+        </fieldset>
+
+        <!-- STEP 3 — LIFESTYLE -->
+        <fieldset class="form-step" data-step="3" aria-labelledby="step3-heading" disabled>
+          <legend id="step3-heading" class="step-heading">Lifestyle</legend>
+
+          <div class="field slider-field">
+            <div class="slider-label-row">
+              <label for="studyHours">Study Hours</label>
+              <output for="studyHours" id="studyHoursValue" class="slider-output">3.0 hrs</output>
+            </div>
+            <input type="range" id="studyHours" name="study_hours" min="0" max="24" step="0.1" value="3">
+            <p class="field-error" id="studyHours-error" role="alert"></p>
+          </div>
+
+          <div class="field slider-field">
+            <div class="slider-label-row">
+              <label for="activityHours">Physical Activity</label>
+              <output for="activityHours" id="activityHoursValue" class="slider-output">1.0 hrs</output>
+            </div>
+            <input type="range" id="activityHours" name="physical_activity_hours" min="0" max="24" step="0.1" value="1">
+            <p class="field-hint">Requires the backend range fix described in chat — see note below the code.</p>
+            <p class="field-error" id="activityHours-error" role="alert"></p>
+          </div>
+
+          <div class="field slider-field">
+            <div class="slider-label-row">
+              <label for="sleepHours">Sleep</label>
+              <output for="sleepHours" id="sleepHoursValue" class="slider-output">7.0 hrs</output>
+            </div>
+            <input type="range" id="sleepHours" name="sleep_hours_per_night" min="0" max="24" step="0.1" value="7">
+            <p class="field-error" id="sleepHours-error" role="alert"></p>
+          </div>
+
+          <div class="field">
+            <label for="stress">Stress Level</label>
+            <select id="stress" name="stress_level" required>
+              <option value="" disabled selected>Select&hellip;</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Very High">Very High</option>
+            </select>
+            <p class="field-error" id="stress-error" role="alert"></p>
+          </div>
+
+          <div class="step-actions">
+            <button type="button" class="btn btn-ghost step-back" data-back="2">Back</button>
+            <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">
+              <span class="btn-label">Predict Mental Health Score</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+        </fieldset>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ RESULT ============ -->
+  <section class="result-section" id="result" hidden>
+    <div class="result-card glass-card">
+      <button class="reset-btn" id="resetBtn" type="button">↺ Reset Assessment</button>
+
+      <h2>Your Predicted Mental Health Score</h2>
+
+      <div class="gauge-wrap">
+        <svg viewBox="0 0 220 220" class="gauge-svg" aria-hidden="true">
+          <circle class="gauge-track" cx="110" cy="110" r="94"></circle>
+          <circle class="gauge-fill" id="gaugeFill" cx="110" cy="110" r="94"></circle>
+        </svg>
+        <div class="gauge-center">
+          <span class="gauge-score" id="gaugeScore">–</span>
+          <span class="gauge-scale" id="gaugeScale">out of 10</span>
+        </div>
+      </div>
+
+      <p class="interpretation-label" id="interpretationLabel"></p>
+      <p class="interpretation-text" id="interpretationText"></p>
+
+      <p class="disclaimer">
+        This prediction is for educational and informational purposes only. It is not a medical diagnosis or a substitute for professional mental-health advice.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Built on a Random Forest model trained on 5,000 student survey responses. Not a clinical or diagnostic tool.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
