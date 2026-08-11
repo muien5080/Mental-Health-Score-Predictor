@@ -1,0 +1,14 @@
+# --- Python Virtual Environments ---
+venv/
+.venv/
+env/
+ENV/
+
+# --- Python Cache / Byte-code ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Environment & Local Configuration ---
+.env
+*.log
