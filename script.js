@@ -9,7 +9,7 @@
 // Configuration
 // --------------------------------------------------------------------------
 
-const API_BASE = 'http://127.0.0.1:8000';
+const API_BASE = 'https://mental-health-score-predictor-p4jb.onrender.com';
 const PREDICT_URL = `${API_BASE}/predict`;
 
 // This frontend calls /predict with POST. The backend as originally supplied
