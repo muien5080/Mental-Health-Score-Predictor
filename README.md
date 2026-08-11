@@ -9,7 +9,7 @@ The project uses a **Random Forest Regression** model trained on a dataset obtai
 ## 🚀 Live Demo
 
 **Live Application:**
-https://mental-health-score-predictor-p4jb.onrender.com
+[https://mentalhealthscore-predictor.onrender.com]
 
 > **Note:** Since the backend is deployed on Render's free tier, the service may take some time to respond after being inactive.
 
