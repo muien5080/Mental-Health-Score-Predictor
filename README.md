@@ -92,9 +92,8 @@ mental-health-score-predictor/
 │
 ├── backend/
 │   ├── main.py
-│   ├── model/
-│   │   └── model.joblib
-│   └── requirements.txt
+│   ├── Mental_Health_Model.pkl
+│
 │
 ├── frontend/
 │   ├── index.html
@@ -102,7 +101,7 @@ mental-health-score-predictor/
 │   └── script.js
 │
 ├── notebooks/
-│   └── model_training.ipynb
+│   └── Mental_Health_Test.ipynb
 │
 ├── data/
 │   └── dataset.csv
@@ -133,27 +132,6 @@ Random Forest was selected because it:
 * Generally performs well on tabular datasets
 * Reduces overfitting compared with a single decision tree
 
-### Model Training
-
-The general model development process was:
-
-```text
-Kaggle Dataset
-      ↓
-Data Cleaning
-      ↓
-Feature Selection
-      ↓
-Train/Test Split
-      ↓
-Random Forest Regression
-      ↓
-Model Evaluation
-      ↓
-Save Model with Joblib
-```
-
-The trained model is serialized using **Joblib**, allowing the FastAPI application to load the trained model without retraining it every time the server starts.
 
 ---
 
