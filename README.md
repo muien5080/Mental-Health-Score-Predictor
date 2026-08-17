@@ -9,7 +9,7 @@ The project uses a **Random Forest Regression** model trained on a dataset obtai
 ## 🚀 Live Demo
 
 **Live Application:**
-[https://mentalhealthscore-predictor.onrender.com]
+https://mentalhealthscore-predictor.onrender.com
 
 > **Note:** Since the backend is deployed on Render's free tier, the service may take some time to respond after being inactive.
 
@@ -156,7 +156,7 @@ Typical preprocessing steps used in the project include:
 * Training the regression model
 
 > **Dataset Source:** Kaggle
-> Add the original Kaggle dataset URL here so the dataset can be properly credited.
+> https://www.kaggle.com/datasets/shivasingh4945/student-social-media-and-mental-health-impact
 
 ---
 
@@ -262,8 +262,8 @@ This project is intended primarily as a **learning, portfolio, and demonstration
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-cd YOUR_REPOSITORY
+git clone https://github.com/muien5080/Mental-Health-Score-Predictor.git
+cd Mental-Health-Score-Predictor.git
 ```
 
 ### 2. Create a virtual environment
@@ -355,7 +355,7 @@ The model's predictions are dependent on the dataset and training process and ma
 
 ## 👨‍💻 Author
 
-**Your Name**
+**Mohammed Muien**
 
 Built as a Machine Learning project to demonstrate:
 
@@ -365,9 +365,3 @@ Built as a Machine Learning project to demonstrate:
 * REST API development with FastAPI
 * Frontend/backend integration
 * Cloud deployment with Render
-
----
-
-## ⭐ Support
-
-If you found this project useful or interesting, consider giving the repository a ⭐ on GitHub.
