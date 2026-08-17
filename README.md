@@ -109,9 +109,6 @@ mental-health-score-predictor/
 ├── README.md
 └── .gitignore
 ```
-
-> Update the folder/file names above if your actual repository structure is different.
-
 ---
 
 ## 🤖 Machine Learning Model
