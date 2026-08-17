@@ -1,5 +1,8 @@
 ﻿# Mental-Health-Score-Predictor
 
+<img width="1632" height="717" alt="image" src="https://github.com/user-attachments/assets/0fd87991-64f4-4ca0-91b6-691df8e293ab" />
+
+
 # 🧠 Mental Health Score Predictor
 
 A Machine Learning web application that predicts a **mental health score** based on user-provided input features.
@@ -260,7 +263,7 @@ This project is intended primarily as a **learning, portfolio, and demonstration
 
 ```bash
 git clone https://github.com/muien5080/Mental-Health-Score-Predictor.git
-cd Mental-Health-Score-Predictor.git
+cd Mental-Health-Score-Predictor
 ```
 
 ### 2. Create a virtual environment
